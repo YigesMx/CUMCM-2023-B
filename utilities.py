@@ -21,6 +21,8 @@ class SingleDetector:
 
     
     def get_slope(self):
+        if hasattr(self, 'slope'):
+            return self.slope
         # 坡面法向量
         slope_normal_vec = sp.Matrix([sp.sin(self.slope_angle), 0, sp.cos(self.slope_angle)]).evalf(self.precision)
         # 坡面
@@ -29,18 +31,25 @@ class SingleDetector:
         return self.slope
     
     def get_direction_vec(self):
+        if hasattr(self, 'direction_vec'):
+            return self.direction_vec
         # 船的方向向量 - direction vector
         self.direction_vec = sp.Matrix([sp.cos(self.direction_angle), sp.sin(self.direction_angle), 0]).evalf(self.precision)
 
         return self.direction_vec
     
     def get_side_vec(self):
+        if hasattr(self, 'side_vec'):
+            return self.side_vec
         # 船的方向向量在x-y平面上旋转90度，得到船的侧向向量 - side vector
         self.side_vec = sp.Matrix([-sp.sin(self.direction_angle), sp.cos(self.direction_angle), 0]).evalf(self.precision)
 
         return self.side_vec
 
     def get_detect_line(self):
+        if hasattr(self, 'detect_line_1') and hasattr(self, 'detect_line_2'):
+            return self.detect_line_1, self.detect_line_2
+
         if not hasattr(self, 'side_vec'):
             self.get_side_vec()
         # 探测器单边检测角度
@@ -55,6 +64,9 @@ class SingleDetector:
         return self.detect_line_1, self.detect_line_2
     
     def get_detect_point(self):
+        if hasattr(self, 'detect_point_1') and hasattr(self, 'detect_point_2'):
+            return self.detect_point_1, self.detect_point_2
+
         if not hasattr(self, 'detect_line_1') or not hasattr(self, 'detect_line_2'):
             self.get_detect_line()
         if not hasattr(self, 'slope'):
@@ -69,6 +81,9 @@ class SingleDetector:
         return self.detect_point_1, self.detect_point_2
     
     def get_scan_segment(self): # 包括与其紧密相关的属性
+        if hasattr(self, 'scan_segment'):
+            return self.scan_segment
+
         if not hasattr(self, 'detect_point_1') or not hasattr(self, 'detect_point_2'):
             self.get_detect_point()
         # 检测扇形的两个边沿与坡面的交点的连线
@@ -84,6 +99,9 @@ class SingleDetector:
         return self.scan_segment
     
     def get_measuring_line(self): # 包括与其紧密相关的属性
+        if hasattr(self, 'measuring_line'):
+            return self.measuring_line
+            
         if not hasattr(self, 'direction_vec'):
             self.get_direction_vec()
         if not hasattr(self, 'side_vec'):
