@@ -272,7 +272,7 @@ class Field:
                           precision=self.precision)
         )
 
-        print('finished calc first_left_measuring_line')
+        # print('finished calc first_left_measuring_line')
 
         # 首先计算顶部出发的第一条测线的位置
         first_top_measuring_line_from_left = self.get_first_top_measuring_line_from_left(
@@ -304,7 +304,7 @@ class Field:
                 print(f'overlap_ratio_1: {overlap_ratio}')
                 return ArrangeError.OVERLAP_RATIO_TOO_LARGE """
 
-            print('finished calc first_top_measuring_line')
+            # print('finished calc first_top_measuring_line')
 
             # 计算顶部测线间距
             next_top_measuring_line_gap = self.get_next_top_measuring_line_gap(
@@ -344,7 +344,7 @@ class Field:
                     next_top_measuring_line
                 )
             
-        print(f'finished calc top_measuring_lines: {len(self.measuring_lines["top"])} in total')
+        # print(f'finished calc top_measuring_lines: {len(self.measuring_lines["top"])} in total')
             
         # 生成左边出发的其余测线，直到某个测线起始点探测到下边界
         i = 0
@@ -382,7 +382,7 @@ class Field:
                 next_left_measuring_line
             )
         
-        print(f'finished calc left_measuring_lines : {len(self.measuring_lines["left"])} in total')
+        # print(f'finished calc left_measuring_lines : {len(self.measuring_lines["left"])} in total')
 
     def get_measuring_line_gross_length(self):
         length = 0
@@ -515,7 +515,8 @@ class MeasuringLine:
         #print(f'end_point_proposal_right: {end_point_proposal_right}')
         if end_point_proposal_right.x > self.field.bottom_wall.p1.x:
             end_point_proposal_bottom = self.trace.intersection(self.field.bottom_wall)
-            self.end_point = end_point_proposal_bottom
+            assert len(end_point_proposal_bottom) == 1
+            self.end_point = end_point_proposal_bottom[0].evalf(self.precision)
         else:
             self.end_point = end_point_proposal_right
 
