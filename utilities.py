@@ -297,12 +297,12 @@ class Field:
             )
 
             # 检测重叠率
-            overlap_ratio = self.get_far_end_overlap_ratio(
+            """ overlap_ratio = self.get_far_end_overlap_ratio(
                 self.measuring_lines['left'][0], self.measuring_lines['top'][0], dir='upward'
             )
-            if overlap_ratio > 0.2:
+             if overlap_ratio > 0.2:
                 print(f'overlap_ratio_1: {overlap_ratio}')
-                return ArrangeError.OVERLAP_RATIO_TOO_LARGE
+                return ArrangeError.OVERLAP_RATIO_TOO_LARGE """
 
             print('finished calc first_top_measuring_line')
 
@@ -332,13 +332,13 @@ class Field:
                                                         precision=self.precision)
 
                 # 检测重叠率
-                overlap_ratio = self.get_far_end_overlap_ratio(
+                """ overlap_ratio = self.get_far_end_overlap_ratio(
                     self.measuring_lines['top'][-1], next_top_measuring_line, dir='upward'
                 )
                 if overlap_ratio > 0.2:
                     print(f'overlap_ratio_2: {overlap_ratio}')
                     print(f'top: {len(self.measuring_lines["top"])} in total')
-                    return ArrangeError.OVERLAP_RATIO_TOO_LARGE
+                    return ArrangeError.OVERLAP_RATIO_TOO_LARGE """
 
                 self.measuring_lines['top'].append(
                     next_top_measuring_line
@@ -370,13 +370,13 @@ class Field:
                                                     precision=self.precision)
             
             # 检测重叠率
-            overlap_ratio = self.get_far_end_overlap_ratio(
+            """ overlap_ratio = self.get_far_end_overlap_ratio(
                 self.measuring_lines['left'][-1], next_left_measuring_line, dir='downward'
             )
             if overlap_ratio > 0.2:
                 print(f'overlap_ratio_3: {overlap_ratio}')
                 print(f'left: {len(self.measuring_lines["left"])} in total')
-                return ArrangeError.OVERLAP_RATIO_TOO_LARGE
+                return ArrangeError.OVERLAP_RATIO_TOO_LARGE """
             
             self.measuring_lines['left'].append(
                 next_left_measuring_line
